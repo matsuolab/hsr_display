@@ -1,11 +1,14 @@
 "use client";
 
+import { RecoilRoot } from "recoil";
 import styled from "styled-components";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <Body>{children}</Body>
+      <RecoilRoot>
+        <Body>{children}</Body>
+      </RecoilRoot>
     </html>
   );
 }

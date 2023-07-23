@@ -1,8 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useRecoilState } from "recoil";
 import ROSLIB from "roslib";
 import styled from "styled-components";
+
+import { Mode, modeState } from "../utils";
 
 type Props = {
   ros: ROSLIB.Ros;
@@ -10,6 +13,7 @@ type Props = {
 
 const ImageView: React.FC<Props> = ({ ros }) => {
   const [imageData, setImageData] = useState<string>("");
+  const [mode, setMode] = useRecoilState(modeState);
 
   // subscribe to /ros_react/image and update imageData
   useEffect(() => {
@@ -19,15 +23,16 @@ const ImageView: React.FC<Props> = ({ ros }) => {
       messageType: "sensor_msgs/CompressedImage",
     });
     imageListener.subscribe((message) => {
+      setMode("image");
       setImageData("data:image/jpeg;base64," + message.data);
     });
     return () => {
       imageListener.unsubscribe();
     };
-  }, [ros]);
+  }, [ros, setMode]);
 
   return (
-    <ImageContainer>
+    <ImageContainer mode={mode}>
       <ImageText src={imageData}></ImageText>
     </ImageContainer>
   );
@@ -35,14 +40,14 @@ const ImageView: React.FC<Props> = ({ ros }) => {
 
 export default ImageView;
 
-const ImageContainer = styled.div`
+const ImageContainer = styled.div<{ mode: Mode }>`
   width: 100%;
   height: 100%;
+  display: ${(props) => (props.mode === "image" ? "flex" : "none")};
+  align-items: center;
+  justify-content: center;
 `;
 
 const ImageText = styled.img`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 100%;
 `;

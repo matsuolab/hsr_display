@@ -1,8 +1,11 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { useRecoilState } from "recoil";
 import ROSLIB from "roslib";
 import styled from "styled-components";
+
+import { Mode, modeState } from "../utils";
 
 type Props = {
   ros: ROSLIB.Ros;
@@ -15,6 +18,7 @@ const StringView: React.FC<Props> = ({ ros }) => {
   const [stringData, setStringData] = useState<string>("");
   const [fontSize, setFontSize] = useState<number>(initialFontSize);
   const [fontColor, setFontColor] = useState<"#f0f0f0" | "#282c34">("#f0f0f0");
+  const [mode, setMode] = useRecoilState(modeState);
 
   const stringElm = useRef<HTMLDivElement>(null);
 
@@ -26,6 +30,7 @@ const StringView: React.FC<Props> = ({ ros }) => {
       messageType: "std_msgs/String",
     });
     stringListener.subscribe((message) => {
+      setMode("string");
       setStringData(message.data);
       setFontColor("#282c34");
       setFontSize(initialFontSize);
@@ -33,7 +38,7 @@ const StringView: React.FC<Props> = ({ ros }) => {
     return () => {
       stringListener.unsubscribe();
     };
-  }, [ros]);
+  }, [ros, setMode]);
 
   // reduce font size when it overflows vertically
   useEffect(() => {
@@ -48,7 +53,7 @@ const StringView: React.FC<Props> = ({ ros }) => {
   }, [stringData, fontSize]);
 
   return (
-    <StringContainer>
+    <StringContainer mode={mode}>
       <StringText ref={stringElm} fontSize={fontSize} color={fontColor}>
         {stringData}
       </StringText>
@@ -58,11 +63,11 @@ const StringView: React.FC<Props> = ({ ros }) => {
 
 export default StringView;
 
-const StringContainer = styled.div`
+const StringContainer = styled.div<{ mode: Mode }>`
   position: absolute;
+  display: ${(props) => (props.mode === "string" ? "flex" : "none")};
   width: 100%;
   height: 1000px;
-  display: flex;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
