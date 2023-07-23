@@ -49,8 +49,8 @@ export default RosConnection;
 
 const RosConnectionStatus = styled.div<{ color: StatusColor }>`
   position: absolute;
-  width: 10px;
-  height: 10px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   top: 10px;
   right: 10px;

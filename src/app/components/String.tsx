@@ -31,5 +31,12 @@ const String: React.FC<Props> = ({ ros }) => {
 export default String;
 
 const StringContainer = styled.div`
-  font-size: 32px;
+  font-size: 100px;
+  width: 100%;
+  height: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  overflow-y: hidden;
+  text-align: center;
 `;
