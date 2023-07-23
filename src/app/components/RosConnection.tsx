@@ -12,6 +12,7 @@ type Props = {
 const RosConnection: React.FC<Props> = ({ rosUrl, setRos }) => {
   const [statusColor, setStatusColor] = useState<"green" | "red" | "gray">("gray");
   useEffect(() => {
+    console.log("Connecting to websocket server.");
     const ros = new ROSLIB.Ros({
       url: rosUrl,
     });
@@ -23,10 +24,16 @@ const RosConnection: React.FC<Props> = ({ rosUrl, setRos }) => {
     ros.on("error", (error) => {
       console.log("Error connecting to websocket server: ", error);
       setStatusColor("red");
+      setTimeout(() => {
+        ros.connect(rosUrl);
+      }, 1000);
     });
     ros.on("close", () => {
       console.log("Connection to websocket server closed.");
       setStatusColor("gray");
+      setTimeout(() => {
+        ros.connect(rosUrl);
+      }, 1000);
     });
     return () => {
       ros.close();
