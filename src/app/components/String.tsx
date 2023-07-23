@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import ROSLIB from "roslib";
-import styles from "./String.module.css";
+import styled from "styled-components";
 
 type Props = {
   ros: ROSLIB.Ros;
@@ -25,7 +25,11 @@ const String: React.FC<Props> = ({ ros }) => {
     };
   }, [ros]);
 
-  return <div className={styles.string}>{stringData}</div>;
+  return <StringContainer>{stringData}</StringContainer>;
 };
 
 export default String;
+
+const StringContainer = styled.div`
+  font-size: 32px;
+`;

@@ -2,7 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import ROSLIB from "roslib";
-import styles from "./RosConnection.module.css";
+import styled from "styled-components";
+
+type StatusColor = "green" | "red" | "gray";
 
 type Props = {
   rosUrl: string;
@@ -10,7 +12,7 @@ type Props = {
 };
 
 const RosConnection: React.FC<Props> = ({ rosUrl, setRos }) => {
-  const [statusColor, setStatusColor] = useState<"green" | "red" | "gray">("gray");
+  const [statusColor, setStatusColor] = useState<StatusColor>("gray");
   useEffect(() => {
     console.log("Connecting to websocket server.");
     const ros = new ROSLIB.Ros({
@@ -40,7 +42,17 @@ const RosConnection: React.FC<Props> = ({ rosUrl, setRos }) => {
     };
   }, [rosUrl, setRos]);
 
-  return <div className={`${styles.status} ${styles[statusColor]}`}></div>;
+  return <RosConnectionStatus color={statusColor}></RosConnectionStatus>;
 };
 
 export default RosConnection;
+
+const RosConnectionStatus = styled.div<{ color: StatusColor }>`
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  top: 10px;
+  right: 10px;
+  background-color: ${(props) => props.color};
+`;
