@@ -26,9 +26,6 @@ const TimeIndicator = () => {
 export default TimeIndicator;
 
 const TimeIndicatorContainer = styled.div`
-  position: absolute;
-  top: 20px;
-  left: 20px;
   font-size: 30px;
   color: #b0b0b0;
 `;

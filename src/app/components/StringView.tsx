@@ -8,7 +8,7 @@ type Props = {
   ros: ROSLIB.Ros;
 };
 
-const initialFontSize = 600;
+const initialFontSize = 601;
 const maxFontSize = 150;
 
 const StringView: React.FC<Props> = ({ ros }) => {
@@ -39,7 +39,7 @@ const StringView: React.FC<Props> = ({ ros }) => {
   useEffect(() => {
     if (stringElm.current) {
       const stringElmHeight = stringElm.current.clientHeight;
-      if (stringElmHeight > window.innerHeight * 0.9) {
+      if (stringElmHeight > 900) {
         setFontSize(Math.min(fontSize * 0.9, maxFontSize));
       } else {
         setFontColor("#f0f0f0");
@@ -61,7 +61,7 @@ export default StringView;
 const StringContainer = styled.div`
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 1000px;
   display: flex;
   justify-content: center;
   align-items: center;

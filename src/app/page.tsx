@@ -9,23 +9,34 @@ import RosConnection from "./components/RosConnection";
 import StringView from "./components/StringView";
 import TimeIndicator from "./components/TimeIndicator";
 
+type Mode = "string" | "image";
+
 export default function Home() {
   const [ros, setRos] = useState<ROSLIB.Ros>();
+  const [mode, setMode] = useState<Mode>("string");
+
   return (
-    <Main>
-      <TimeIndicator />
-      <RosConnection rosUrl="ws://localhost:9090" setRos={setRos} />
-      {ros && (
-        <>
-          <StringView ros={ros} />
-          <ImageView ros={ros} />
-        </>
-      )}
-    </Main>
+    <>
+      <Header>
+        <TimeIndicator />
+        <RosConnection rosUrl="ws://localhost:9090" setRos={setRos} />
+      </Header>
+      <Main>{ros && (mode === "string" ? <StringView ros={ros} /> : mode === "image" ? <ImageView ros={ros} /> : <></>)}</Main>
+    </>
   );
 }
 
 const Main = styled.main`
-  width: 100vw;
-  height: 100vh;
+  width: 1920px;
+  height: 1000px;
+`;
+
+const Header = styled.div`
+  display: flex;
+  width: 100%;
+  height: 80px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px;
+  box-sizing: border-box;
 `;

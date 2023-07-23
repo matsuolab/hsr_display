@@ -48,11 +48,8 @@ const RosConnection: React.FC<Props> = ({ rosUrl, setRos }) => {
 export default RosConnection;
 
 const RosConnectionStatus = styled.div<{ color: StatusColor }>`
-  position: absolute;
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  top: 20px;
-  right: 20px;
   background-color: ${(props) => props.color};
 `;
