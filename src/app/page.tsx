@@ -6,11 +6,13 @@ import styled from "styled-components";
 
 import RosConnection from "./components/RosConnection";
 import String from "./components/String";
+import TimeIndicator from "./components/TimeIndicator";
 
 export default function Home() {
   const [ros, setRos] = useState<ROSLIB.Ros>();
   return (
     <Main>
+      <TimeIndicator />
       <RosConnection rosUrl="ws://localhost:9090" setRos={setRos} />
       {ros && <String ros={ros} />}
     </Main>
