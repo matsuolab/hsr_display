@@ -28,3 +28,15 @@ npm run start
 ```
 
 ブラウザで http://localhost:3000 にアクセスすると、画面が表示される
+
+## ROS インターフェース
+
+### 文字列表示
+
+- Topic: /ros_react/string
+- Type: std_msgs/String
+
+### 画像表示
+
+- Topic: /ros_react/image_compressed/compressed
+- Type: sensor_msgs/CompressedImage
