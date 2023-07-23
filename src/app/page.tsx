@@ -4,8 +4,9 @@ import { useState } from "react";
 import ROSLIB from "roslib";
 import styled from "styled-components";
 
+import ImageView from "./components/ImageView";
 import RosConnection from "./components/RosConnection";
-import String from "./components/String";
+import StringView from "./components/StringView";
 import TimeIndicator from "./components/TimeIndicator";
 
 export default function Home() {
@@ -14,7 +15,12 @@ export default function Home() {
     <Main>
       <TimeIndicator />
       <RosConnection rosUrl="ws://localhost:9090" setRos={setRos} />
-      {ros && <String ros={ros} />}
+      {ros && (
+        <>
+          <StringView ros={ros} />
+          <ImageView ros={ros} />
+        </>
+      )}
     </Main>
   );
 }

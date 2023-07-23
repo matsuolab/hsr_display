@@ -11,7 +11,7 @@ type Props = {
 const initialFontSize = 600;
 const maxFontSize = 150;
 
-const String: React.FC<Props> = ({ ros }) => {
+const StringView: React.FC<Props> = ({ ros }) => {
   const [stringData, setStringData] = useState<string>("");
   const [fontSize, setFontSize] = useState<number>(initialFontSize);
   const [fontColor, setFontColor] = useState<"#f0f0f0" | "#282c34">("#f0f0f0");
@@ -56,9 +56,10 @@ const String: React.FC<Props> = ({ ros }) => {
   );
 };
 
-export default String;
+export default StringView;
 
 const StringContainer = styled.div`
+  position: absolute;
   width: 100%;
   height: 100%;
   display: flex;
