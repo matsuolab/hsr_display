@@ -1,5 +1,9 @@
 # ros_react_front
 
+## 環境
+
+- Node.js v20.5.0
+
 ## セットアップ
 
 ```bash
