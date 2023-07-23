@@ -24,6 +24,7 @@ const ImageView: React.FC<Props> = ({ ros }) => {
     });
     imageListener.subscribe((message) => {
       setMode("image");
+      //@ts-ignore
       setImageData("data:image/jpeg;base64," + message.data);
     });
     return () => {

@@ -31,6 +31,7 @@ const StringView: React.FC<Props> = ({ ros }) => {
     });
     stringListener.subscribe((message) => {
       setMode("string");
+      //@ts-ignore
       setStringData(message.data);
       setFontColor("#282c34");
       setFontSize(initialFontSize);
