@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
+import { useState } from "react";
 import ROSLIB from "roslib";
 import styled from "styled-components";
 
@@ -9,11 +8,9 @@ import ImageView from "./components/ImageView";
 import RosConnection from "./components/RosConnection";
 import StringView from "./components/StringView";
 import TimeIndicator from "./components/TimeIndicator";
-import { modeState } from "./utils";
 
 export default function Home() {
   const [ros, setRos] = useState<ROSLIB.Ros>();
-  const [mode, setMode] = useRecoilState(modeState);
 
   return (
     <>
