@@ -74,5 +74,6 @@ const StringText = styled.div<{ fontSize: number; color: string }>`
   width: 90%;
   height: fit-content;
   overflow-wrap: break-word;
+  white-space: pre-wrap;
   text-align: center;
 `;
