@@ -20,6 +20,9 @@ const String: React.FC<Props> = ({ ros }) => {
     stringListener.subscribe((message) => {
       setStringData(message.data);
     });
+    return () => {
+      stringListener.unsubscribe();
+    };
   }, [ros]);
 
   return <div className={styles.string}>{stringData}</div>;

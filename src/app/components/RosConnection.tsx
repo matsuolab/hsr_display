@@ -28,6 +28,9 @@ const RosConnection: React.FC<Props> = ({ rosUrl, setRos }) => {
       console.log("Connection to websocket server closed.");
       setStatusColor("gray");
     });
+    return () => {
+      ros.close();
+    };
   }, [rosUrl, setRos]);
 
   return <div className={`${styles.status} ${styles[statusColor]}`}></div>;
