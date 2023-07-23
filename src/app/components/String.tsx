@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ROSLIB from "roslib";
 import styled from "styled-components";
 
@@ -10,7 +10,12 @@ type Props = {
 
 const String: React.FC<Props> = ({ ros }) => {
   const [stringData, setStringData] = useState<string>("");
+  const [fontSize, setFontSize] = useState<number>(100);
+  const [fontColor, setFontColor] = useState<"#f0f0f0" | "#282c34">("#f0f0f0");
 
+  const stringElm = useRef<HTMLDivElement>(null);
+
+  // subscribe to /ros_react/string and update stringData
   useEffect(() => {
     const stringListener = new ROSLIB.Topic({
       ros: ros,
@@ -19,24 +24,53 @@ const String: React.FC<Props> = ({ ros }) => {
     });
     stringListener.subscribe((message) => {
       setStringData(message.data);
+      setFontSize(100);
+      setFontColor("#282c34");
     });
     return () => {
       stringListener.unsubscribe();
     };
   }, [ros]);
 
-  return <StringContainer>{stringData}</StringContainer>;
+  // reduce font size when it overflows vertically
+  useEffect(() => {
+    console.log("stringData: ", stringData);
+    if (stringElm.current) {
+      const stringElmHeight = stringElm.current.clientHeight;
+      if (stringElmHeight > window.innerHeight * 0.9) {
+        setFontSize(fontSize - 1);
+      } else {
+        setFontColor("#f0f0f0");
+      }
+    }
+  }, [stringData, fontSize]);
+
+  return (
+    <StringContainer>
+      <StringText ref={stringElm} fontSize={fontSize} color={fontColor}>
+        {stringData}
+      </StringText>
+    </StringContainer>
+  );
 };
 
 export default String;
 
 const StringContainer = styled.div`
-  font-size: 100px;
   width: 100%;
   height: 100%;
-  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   box-sizing: border-box;
-  overflow-wrap: break-word;
   overflow-y: hidden;
+`;
+
+const StringText = styled.div<{ fontSize: number; color: string }>`
+  font-size: ${(props) => props.fontSize}px;
+  color: ${(props) => props.color};
+  width: 90%;
+  height: fit-content;
+  overflow-wrap: break-word;
   text-align: center;
 `;
