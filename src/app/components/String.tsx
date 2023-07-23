@@ -8,7 +8,8 @@ type Props = {
   ros: ROSLIB.Ros;
 };
 
-const initialFontSize = 150;
+const initialFontSize = 600;
+const maxFontSize = 150;
 
 const String: React.FC<Props> = ({ ros }) => {
   const [stringData, setStringData] = useState<string>("");
@@ -26,8 +27,8 @@ const String: React.FC<Props> = ({ ros }) => {
     });
     stringListener.subscribe((message) => {
       setStringData(message.data);
-      setFontSize(initialFontSize);
       setFontColor("#282c34");
+      setFontSize(initialFontSize);
     });
     return () => {
       stringListener.unsubscribe();
@@ -36,11 +37,10 @@ const String: React.FC<Props> = ({ ros }) => {
 
   // reduce font size when it overflows vertically
   useEffect(() => {
-    console.log("stringData: ", stringData);
     if (stringElm.current) {
       const stringElmHeight = stringElm.current.clientHeight;
       if (stringElmHeight > window.innerHeight * 0.9) {
-        setFontSize(fontSize * 0.9);
+        setFontSize(Math.min(fontSize * 0.9, maxFontSize));
       } else {
         setFontColor("#f0f0f0");
       }
