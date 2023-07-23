@@ -8,9 +8,11 @@ type Props = {
   ros: ROSLIB.Ros;
 };
 
+const initialFontSize = 150;
+
 const String: React.FC<Props> = ({ ros }) => {
   const [stringData, setStringData] = useState<string>("");
-  const [fontSize, setFontSize] = useState<number>(100);
+  const [fontSize, setFontSize] = useState<number>(initialFontSize);
   const [fontColor, setFontColor] = useState<"#f0f0f0" | "#282c34">("#f0f0f0");
 
   const stringElm = useRef<HTMLDivElement>(null);
@@ -24,7 +26,7 @@ const String: React.FC<Props> = ({ ros }) => {
     });
     stringListener.subscribe((message) => {
       setStringData(message.data);
-      setFontSize(100);
+      setFontSize(initialFontSize);
       setFontColor("#282c34");
     });
     return () => {
@@ -38,7 +40,7 @@ const String: React.FC<Props> = ({ ros }) => {
     if (stringElm.current) {
       const stringElmHeight = stringElm.current.clientHeight;
       if (stringElmHeight > window.innerHeight * 0.9) {
-        setFontSize(fontSize - 1);
+        setFontSize(fontSize * 0.9);
       } else {
         setFontColor("#f0f0f0");
       }
