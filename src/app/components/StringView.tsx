@@ -71,4 +71,5 @@ const StringText = styled.div<{ mode: Mode; fontSize: number; color: string }>`
   overflow-wrap: break-word;
   white-space: pre-wrap;
   text-align: center;
+  transition: ${(props) => (props.color === "#f0f0f0" ? "color 0.2s ease-in-out" : "")};
 `;
