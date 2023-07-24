@@ -32,24 +32,13 @@ const ImageView: React.FC<Props> = ({ ros }) => {
     };
   }, [ros, setMode]);
 
-  return (
-    <ImageContainer mode={mode}>
-      <ImageText src={imageData}></ImageText>
-    </ImageContainer>
-  );
+  return <ImageText mode={mode} src={imageData}></ImageText>;
 };
 
 export default ImageView;
 
-const ImageContainer = styled.div<{ mode: Mode }>`
-  width: 100%;
-  height: 100%;
-  display: ${(props) => (props.mode === "image" ? "flex" : "none")};
-  align-items: center;
-  justify-content: center;
-`;
-
-const ImageText = styled.img`
+const ImageText = styled.img<{ mode: Mode }>`
+  display: ${(props) => (props.mode === "image" ? "block" : "none")};
   width: 100%;
   height: 100%;
   padding: 20px;

@@ -54,28 +54,16 @@ const StringView: React.FC<Props> = ({ ros }) => {
   }, [stringData, fontSize]);
 
   return (
-    <StringContainer mode={mode}>
-      <StringText ref={stringElm} fontSize={fontSize} color={fontColor}>
-        {stringData}
-      </StringText>
-    </StringContainer>
+    <StringText mode={mode} ref={stringElm} fontSize={fontSize} color={fontColor}>
+      {stringData}
+    </StringText>
   );
 };
 
 export default StringView;
 
-const StringContainer = styled.div<{ mode: Mode }>`
-  position: absolute;
-  display: ${(props) => (props.mode === "string" ? "flex" : "none")};
-  width: 100%;
-  height: 1000px;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  overflow-y: hidden;
-`;
-
-const StringText = styled.div<{ fontSize: number; color: string }>`
+const StringText = styled.div<{ mode: Mode; fontSize: number; color: string }>`
+  display: ${(props) => (props.mode === "string" ? "block" : "none")};
   font-size: ${(props) => props.fontSize}px;
   color: ${(props) => props.color};
   width: 90%;

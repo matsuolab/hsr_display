@@ -30,8 +30,14 @@ export default function Home() {
 }
 
 const Main = styled.main`
-  width: 1920px;
-  height: 1000px;
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  overflow-y: hidden;
 `;
 
 const Header = styled.div`
