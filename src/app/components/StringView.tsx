@@ -11,7 +11,7 @@ type Props = {
   ros: ROSLIB.Ros;
 };
 
-const initialFontSize = 601;
+const initialFontSize = 622;
 const maxFontSize = 150;
 
 const StringView: React.FC<Props> = ({ ros }) => {

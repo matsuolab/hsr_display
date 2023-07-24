@@ -14,6 +14,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 }
 
 const Body = styled.body`
+  @font-face {
+    font-family: "Noto Sans JP";
+    src: url("NotoSansJP-Regular.ttf");
+  }
+  font-family: "Noto Sans JP", sans-serif;
   width: 1920px;
   height: 1080px;
   margin: 0;
