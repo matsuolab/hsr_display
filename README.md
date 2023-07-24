@@ -38,5 +38,5 @@ npm run start
 
 ### 画像表示
 
-- Topic: /ros_react/image_compressed/compressed
+- Topic: /ros_react/image/compressed
 - Type: sensor_msgs/CompressedImage
