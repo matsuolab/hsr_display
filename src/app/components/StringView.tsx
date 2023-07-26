@@ -13,11 +13,13 @@ type Props = {
 
 const initialFontSize = 622;
 const maxFontSize = 150;
+const defaultFontColor = "#f0f0f0";
 
 const StringView: React.FC<Props> = ({ ros }) => {
   const [stringData, setStringData] = useState<string>("");
   const [fontSize, setFontSize] = useState<number>(initialFontSize);
-  const [fontColor, setFontColor] = useState<"#f0f0f0" | "#282c34">("#f0f0f0");
+  const [visible, setVisible] = useState<boolean>(true);
+  const [fontColor, setFontColor] = useState<string>(defaultFontColor);
   const [mode, setMode] = useRecoilState(modeState);
 
   const stringElm = useRef<HTMLDivElement>(null);
@@ -29,11 +31,20 @@ const StringView: React.FC<Props> = ({ ros }) => {
       name: "/ros_react/string",
       messageType: "std_msgs/String",
     });
+    const colorParam = new ROSLIB.Param({
+      ros: ros,
+      name: "/ros_react/font_color",
+    });
     stringListener.subscribe((message) => {
       setMode("string");
       //@ts-ignore
       setStringData(message.data);
-      setFontColor("#282c34");
+      setVisible(false);
+      colorParam.get((value) => {
+        //@ts-ignore
+        setFontColor(value);
+      });
+      colorParam.delete(() => {});
       setFontSize(initialFontSize);
     });
     return () => {
@@ -48,13 +59,13 @@ const StringView: React.FC<Props> = ({ ros }) => {
       if (stringElmHeight > 900) {
         setFontSize(Math.min(fontSize * 0.9, maxFontSize));
       } else {
-        setFontColor("#f0f0f0");
+        setVisible(true);
       }
     }
   }, [stringData, fontSize]);
 
   return (
-    <StringText mode={mode} ref={stringElm} fontSize={fontSize} color={fontColor}>
+    <StringText mode={mode} ref={stringElm} fontSize={fontSize} visible={visible} color={fontColor}>
       {stringData}
     </StringText>
   );
@@ -62,14 +73,14 @@ const StringView: React.FC<Props> = ({ ros }) => {
 
 export default StringView;
 
-const StringText = styled.div<{ mode: Mode; fontSize: number; color: string }>`
+const StringText = styled.div<{ mode: Mode; fontSize: number; visible: boolean; color: string }>`
   display: ${(props) => (props.mode === "string" ? "block" : "none")};
   font-size: ${(props) => props.fontSize}px;
-  color: ${(props) => props.color};
+  color: ${(props) => (props.visible ? props.color : "transparent")};
   width: 90%;
   height: fit-content;
   overflow-wrap: break-word;
   white-space: pre-wrap;
   text-align: center;
-  transition: ${(props) => (props.color === "#f0f0f0" ? "color 0.2s ease-in-out" : "")};
+  transition: ${(props) => (props.visible ? "color 0.2s ease-in-out" : "")};
 `;
