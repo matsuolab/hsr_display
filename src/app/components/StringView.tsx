@@ -44,6 +44,7 @@ const StringView: React.FC<Props> = ({ ros }) => {
         //@ts-ignore
         setFontColor(value);
       });
+      colorParam.delete(() => {});
       setFontSize(initialFontSize);
     });
     return () => {
