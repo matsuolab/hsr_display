@@ -4,6 +4,7 @@ import { useState } from "react";
 import ROSLIB from "roslib";
 import styled from "styled-components";
 
+import BatteryInfo from "./components/BatteryInfo";
 import ImageView from "./components/ImageView";
 import RosConnection from "./components/RosConnection";
 import StringView from "./components/StringView";
@@ -16,6 +17,7 @@ export default function Home() {
     <>
       <Header>
         <TimeIndicator />
+        {ros && <BatteryInfo ros={ros} />}
         <RosConnection rosUrl="ws://localhost:9090" setRos={setRos} />
       </Header>
       <Main>
