@@ -56,7 +56,7 @@ const StringView: React.FC<Props> = ({ ros }) => {
   useEffect(() => {
     if (stringElm.current) {
       const stringElmHeight = stringElm.current.clientHeight;
-      if (stringElmHeight > 900) {
+      if (stringElmHeight > 520) {
         setFontSize(Math.min(fontSize * 0.9, maxFontSize));
       } else {
         setVisible(true);
