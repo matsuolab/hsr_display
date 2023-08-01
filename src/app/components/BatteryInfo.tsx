@@ -19,13 +19,18 @@ const BatteryInfo: React.FC<Props> = ({ ros }) => {
     batteryListener.subscribe((message) => {
       //@ts-ignore
       const fixedPower = message.power.toFixed(2) as string;
-      setBatteryData(fixedPower);
+      setBatteryData(fixedPower + " %");
     });
     return () => {
       batteryListener.unsubscribe();
     };
   });
-  return <>{batteryData}</>;
+  return <BatteryInfoContainer>{batteryData}</BatteryInfoContainer>;
 };
 
 export default BatteryInfo;
+
+const BatteryInfoContainer = styled.div`
+  font-size: 30px;
+  color: #b0b0b0;
+`;
