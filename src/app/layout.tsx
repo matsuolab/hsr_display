@@ -20,7 +20,7 @@ const Body = styled.body`
   }
   font-family: "Noto Sans JP", sans-serif;
   width: 1024px;
-  height: 768px;
+  height: 600px;
   margin: 0;
   padding: 0;
   background-color: #282c34;
