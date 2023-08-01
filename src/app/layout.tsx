@@ -14,18 +14,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 }
 
 const Body = styled.body`
-<<<<<<< Updated upstream
   @font-face {
     font-family: "Noto Sans JP";
     src: url("NotoSansJP-Regular.ttf");
   }
   font-family: "Noto Sans JP", sans-serif;
-  width: 1920px;
-  height: 1080px;
-=======
   width: 1024px;
   height: 768px;
->>>>>>> Stashed changes
   margin: 0;
   padding: 0;
   background-color: #282c34;
