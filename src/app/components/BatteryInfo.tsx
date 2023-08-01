@@ -9,7 +9,7 @@ type Props = {
 };
 
 const BatteryInfo: React.FC<Props> = ({ ros }) => {
-  const [batteryData, setBatteryData] = useState<string>("");
+  const [power, setPower] = useState<number>(0);
   useEffect(() => {
     const batteryListener = new ROSLIB.Topic({
       ros: ros,
@@ -18,19 +18,26 @@ const BatteryInfo: React.FC<Props> = ({ ros }) => {
     });
     batteryListener.subscribe((message) => {
       //@ts-ignore
-      const fixedPower = message.power.toFixed(2) as string;
-      setBatteryData(fixedPower + " %");
+      setPower(parseFloat(message.power as string));
     });
     return () => {
       batteryListener.unsubscribe();
     };
   });
-  return <BatteryInfoContainer>{batteryData}</BatteryInfoContainer>;
+  return <BatteryInfoContainer power={power}>{power.toFixed(2)} %</BatteryInfoContainer>;
 };
 
 export default BatteryInfo;
 
-const BatteryInfoContainer = styled.div`
+const BatteryInfoContainer = styled.div<{ power: number }>`
   font-size: 30px;
-  color: #b0b0b0;
+  color: ${(props) => {
+    if (props.power > 50) {
+      return "lime";
+    } else if (props.power > 20) {
+      return "orange";
+    } else {
+      return "red";
+    }
+  }};
 `;

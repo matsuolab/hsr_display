@@ -50,4 +50,7 @@ const Header = styled.div`
   align-items: center;
   padding: 20px 20px;
   box-sizing: border-box;
+  > * {
+    margin: 0 10px;
+  }
 `;

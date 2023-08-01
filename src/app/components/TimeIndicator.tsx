@@ -28,4 +28,5 @@ export default TimeIndicator;
 const TimeIndicatorContainer = styled.div`
   font-size: 30px;
   color: #b0b0b0;
+  flex-grow: 1;
 `;
