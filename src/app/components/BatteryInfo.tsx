@@ -18,8 +18,8 @@ const BatteryInfo: React.FC<Props> = ({ ros }) => {
     });
     batteryListener.subscribe((message) => {
       //@ts-ignore
-      console.log(message.power);
-      setBatteryData(message.power);
+      const fixedPower = message.power.toFixed(2) as string;
+      setBatteryData(fixedPower);
     });
     return () => {
       batteryListener.unsubscribe();
