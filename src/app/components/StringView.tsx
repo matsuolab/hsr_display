@@ -28,12 +28,12 @@ const StringView: React.FC<Props> = ({ ros }) => {
   useEffect(() => {
     const stringListener = new ROSLIB.Topic({
       ros: ros,
-      name: "/ros_react/string",
+      name: "/hsr_monitor/string",
       messageType: "std_msgs/String",
     });
     const colorParam = new ROSLIB.Param({
       ros: ros,
-      name: "/ros_react/font_color",
+      name: "/hsr_monitor/font_color",
     });
     stringListener.subscribe((message) => {
       setMode("string");

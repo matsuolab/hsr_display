@@ -19,7 +19,7 @@ const ImageView: React.FC<Props> = ({ ros }) => {
   useEffect(() => {
     const imageListener = new ROSLIB.Topic({
       ros: ros,
-      name: "/ros_react/image/compressed",
+      name: "/hsr_monitor/image/compressed",
       messageType: "sensor_msgs/CompressedImage",
     });
     imageListener.subscribe((message) => {
