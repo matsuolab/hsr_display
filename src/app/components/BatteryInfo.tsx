@@ -30,7 +30,7 @@ const BatteryInfo: React.FC<Props> = ({ ros }) => {
 export default BatteryInfo;
 
 const BatteryInfoContainer = styled.div<{ power: number }>`
-  font-size: 30px;
+  font-size: 24px;
   color: ${(props) => {
     if (props.power > 50) {
       return "lime";
