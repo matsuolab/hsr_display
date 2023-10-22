@@ -5,5 +5,6 @@ while ! nc -z localhost 3000; do
   sleep 0.1
 done
 
+echo "Server started"
 export DISPLAY=:0
 firefox --kiosk http://localhost:3000
