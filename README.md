@@ -7,7 +7,7 @@
 ## セットアップ
 
 ```bash
-git clone git@github.com:hellososhi/ros_react_front.git
+git clone git@github.com:matsuolab/hsr_display.git
 cd ros_react_front
 npm install
 ```
