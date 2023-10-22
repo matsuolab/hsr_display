@@ -17,7 +17,7 @@ cd hsr_display
 ./RUN-DOCKER-CONTAINER.sh
 ```
 
-ブラウザで http://localhost:3000 にアクセスすると、画面が表示される
+ブラウザも起動するが、その時点でサーバーが起動していないので、手動でリロードする必要がある
 
 ## ROS インターフェース
 
