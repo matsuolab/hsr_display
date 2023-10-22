@@ -33,17 +33,17 @@ npm run start
 
 ### 文字列表示
 
-- Topic: /ros_react/string
+- Topic: /hsr_monitor/string
 - Type: std_msgs/String
 
 ### 画像表示
 
-- Topic: /ros_react/image/compressed
+- Topic: /hsr_monitor/image/compressed
 - Type: sensor_msgs/CompressedImage
 
 ### 文字色変更
 
-- Param: /ros_react/font_color
+- Param: /hsr_monitor/font_color
 - Type: string
 - Value: CSS 互換の色指定
   - ex. `"red"`, `"rgb(255, 0, 0)"`, `"hsl(0, 100%, 50%)"`
