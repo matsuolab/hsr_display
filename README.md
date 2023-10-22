@@ -8,23 +8,13 @@
 
 ```bash
 git clone git@github.com:matsuolab/hsr_display.git
-cd ros_react_front
-npm install
+cd hsr_display
 ```
 
 ## 起動
 
-### 開発時
-
 ```bash
-npm run dev
-```
-
-### 本番
-
-```bash
-npm run build
-npm run start
+./RUN-DOCKER-CONTAINER.sh
 ```
 
 ブラウザで http://localhost:3000 にアクセスすると、画面が表示される
@@ -48,4 +38,4 @@ npm run start
 - Value: CSS 互換の色指定
   - ex. `"red"`, `"rgb(255, 0, 0)"`, `"hsl(0, 100%, 50%)"`
   - rosparam の仕様上、`#` から始まる色指定はできない
-- Note: 文字列を表示するたびにこのパラメータは削除されるので、色を指定する場合は `/ros_react/string` に文字列を送信する前に毎回このパラメータを設定する必要がある
+- Note: 文字列を表示するたびにこのパラメータは削除されるので、色を指定する場合は `/hsr_monitor/string` に文字列を送信する前に毎回このパラメータを設定する必要がある
