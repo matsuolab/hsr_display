@@ -7,4 +7,4 @@ done
 
 echo "Server started"
 export DISPLAY=:0
-firefox --kiosk http://localhost:3000 &
+firefox --kiosk http://localhost:3000 > /dev/null 2>&1 &
