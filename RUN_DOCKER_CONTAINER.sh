@@ -1,3 +1,4 @@
+cd $(dirname $0)
 docker-compose -p hsr_display -f ./docker-compose.yml up -d
 
 # wait for the server to start
